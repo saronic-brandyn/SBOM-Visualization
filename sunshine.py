@@ -1238,7 +1238,25 @@ def should_add_vulnerability(vulnerability_data, only_in_cisa_kev, only_critical
     return True
 
 
+def extract_from_intoto_statement(data):
+    is_in_toto = False
+    if "_type" in data and "predicateType" in data and "predicate" in data and "subject" in data:
+        try:
+            if data["_type"].startswith("https://in-toto.io/Statement/") and data["predicateType"].startswith("https://cyclonedx.org/"):
+                is_in_toto = True            
+        except Exception as e:
+            custom_print(f"Error parsing input file: {e}")
+            exit()
+    
+    if is_in_toto is False:
+        return data
+
+    custom_print(f"Input file is an in-toto Statement, I'll extract CycloneDX SBOM")
+    return data["predicate"]
+
+
 def parse_json_data(data, enrich_cves, only_in_cisa_kev, only_critical_severity, only_high_severity_or_above, only_medium_severity_or_above, only_low_severity_or_above, min_cvss, min_epss):
+    data = extract_from_intoto_statement(data)
     all_bom_refs, meta_bom_ref_is_used = get_all_bom_refs(data)
 
     guessed_bom_refs_cache = {}

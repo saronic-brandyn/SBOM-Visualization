@@ -1100,6 +1100,8 @@ def parse_licenses(component):
                     licenses.add(license["license"]["id"])
                 elif "name" in license["license"]:
                     licenses.add(license["license"]["name"])
+            if "expression" in license:
+                licenses.add(license["expression"])
     return sorted(list(licenses))
 
 

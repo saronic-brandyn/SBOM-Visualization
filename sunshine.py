@@ -2299,13 +2299,6 @@ def main_web(input_string, enrich_cves, only_in_cisa_kev, only_critical_severity
 
 
 if __name__ == "__main__":
-    custom_print(f'''
- ▗▄▄▖▗▖ ▗▖▗▖  ▗▖ ▗▄▄▖▗▖ ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖
-▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌   ▐▌ ▐▌  █  ▐▛▚▖▐▌▐▌   
- ▝▀▚▖▐▌ ▐▌▐▌ ▝▜▌ ▝▀▚▖▐▛▀▜▌  █  ▐▌ ▝▜▌▐▛▀▀▘
-▗▄▄▞▘▝▚▄▞▘▐▌  ▐▌▗▄▄▞▘▐▌ ▐▌▗▄█▄▖▐▌  ▐▌▐▙▄▄▖
-    ''')
-
     parser = argparse.ArgumentParser(description=f"{NAME}: actionable CycloneDX visualization")
     parser.add_argument("-i", "--input", help="path of input CycloneDX file")
     parser.add_argument("-o", "--output", help="path of output HTML file")
@@ -2324,7 +2317,17 @@ if __name__ == "__main__":
 
     parser.add_argument("-n", "--no-segment-limit", help="prevent the automatic conversion of charts with many segments into still images", action="store_true")
 
+    parser.add_argument("-nl", "--no-logo", help="prevent the display of the banner logo on startup", action="store_true")
+
     args = parser.parse_args()
+    
+    if not args.no_logo:
+        custom_print(f'''
+ ▗▄▄▖▗▖ ▗▖▗▖  ▗▖ ▗▄▄▖▗▖ ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖
+▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌   ▐▌ ▐▌  █  ▐▛▚▖▐▌▐▌   
+ ▝▀▚▖▐▌ ▐▌▐▌ ▝▜▌ ▝▀▚▖▐▛▀▜▌  █  ▐▌ ▝▜▌▐▛▀▀▘
+▗▄▄▞▘▝▚▄▞▘▐▌  ▐▌▗▄▄▞▘▐▌ ▐▌▗▄█▄▖▐▌  ▐▌▐▙▄▄▖
+        ''')
 
     if not args.input or not args.output:
         parser.print_help()

@@ -49,6 +49,7 @@ options:
   -c, --min-cvss MIN_CVSS                 show only vulnerabilities with score equal to or greater than the selected value, which can be in rage 0.0-10.0
   -p, --min-epss MIN_EPSS                 show only vulnerabilities with EPSS equal to or greater than the selected value, which can be in rage 0.00-1.00
   -n, --no-segment-limit                  prevent the automatic conversion of charts with many segments into still images
+  -nl, --no-logo                          prevent the display of the banner logo on startup
 ```
 
 <br>
